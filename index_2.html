@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stop Pisos - Catálogo Online</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e7e34 0%, #0066cc 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .whatsapp-header {
+            background-color: #ffc107;
+            color: #1e7e34;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .whatsapp-header a {
+            color: #1e7e34;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e7e34 0%, #0066cc 50%, #ffc107 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .hero h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .search-box {
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            border: 2px solid #0066cc;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #1e7e34;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background-color: #ffc107;
+            color: #1e7e34;
+        }
+
+        .filter-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #e0e0e0;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-category {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #1e7e34;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1e7e34;
+        }
+
+        .product-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .product-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .product-button:hover {
+            background-color: #1e7e34;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .modal-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+
+        .modal-button:hover {
+            background-color: #1e7e34;
+        }
+
+        footer {
+            background-color: #1e7e34;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .footer-section a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 99;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+<header>
+<h1>🏠 Stop Pisos</h1>
+<div class="whatsapp-header">
+<a href="https://wa.me/559881236521?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20os%20pisos%20da%20Stop%20Pisos.">📱 9881236521</a>
+</div>
+</header>
+<div class="container">
+<div class="hero">
+<h2>Catálogo de Pisos Premium</h2>
+<p>Qualidade, Variedade e Elegância para seus Espaços</p>
+</div>
+<div class="search-box">
+<input id="searchInput" placeholder="Buscar por nome, tamanho ou tipo de piso..." type="text"/>
+</div>
+<div class="filters">
+<button class="filter-btn active" onclick="filterProducts('Todos')">Todos (136)</button>
+<button class="filter-btn" onclick="filterProducts('Outros')">Outros (113)</button>
+<button class="filter-btn" onclick="filterProducts('Pisos Azul')">Pisos Azul (5)</button>
+<button class="filter-btn" onclick="filterProducts('Pisos Cinza')">Pisos Cinza (5)</button>
+<button class="filter-btn" onclick="filterProducts('Pisos Claros')">Pisos Claros (3)</button>
+<button class="filter-btn" onclick="filterProducts('Pisos Dourado')">Pisos Dourado (5)</button>
+<button class="filter-btn" onclick="filterProducts('Pisos Preto')">Pisos Preto (5)</button>
+</div>
+<div class="products-grid" id="productsGrid">
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="RT86145- PISO RET 86X86" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776867145389-gv4034mzqct.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">RT86145- PISO RET 86X86</div>
+<div class="product-description">RT86145- PISO RET 86X86
+
+BRONX SATINY MAG</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('RT86145- PISO RET 86X86')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Azul" onclick="openModal(this)">
+<img alt="PISO RET POLIDO 85X85" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776867141845-cn1382pjlin.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Azul</div>
+<div class="product-name">PISO RET POLIDO 85X85</div>
+<div class="product-description">PISO RET POLIDO 85X85
+
+PACIFIC BLUE LUX MAG
+
+(2,16M²) 85147</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('PISO RET POLIDO 85X85')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="RT86145- PISO RET 86X86" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776867135618-epzs16q3pbb.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">RT86145- PISO RET 86X86</div>
+<div class="product-description">RT86145- PISO RET 86X86
+
+BRONX SATINY MAG</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('RT86145- PISO RET 86X86')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="PISO 70X70 RET PR7081" class="product-image" src="PR7081.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">PISO 70X70 RET PR7081</div>
+<div class="product-description">PISO 70X70 RET PR7081
+
+POLIDO (3,43M²)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('PISO 70X70 RET PR7081')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="PISO RET 70X70 PEDRA" class="product-image" src="PISO-RET-70X70-PEDRA.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">PISO RET 70X70 PEDRA</div>
+<div class="product-description">PISO RET 70X70 PEDRA
+
+NOCE (SAFE STEP) 3,43M2 7PC</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('PISO RET 70X70 PEDRA')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Cinza" onclick="openModal(this)">
+<img alt="PISO 70X70 RET CINZA URBANO SAFE STEP" class="product-image" src="PISO-70X70-RET-CINZA-URBANO-SA.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Cinza</div>
+<div class="product-name">PISO 70X70 RET CINZA URBANO SAFE STEP</div>
+<div class="product-description">PISO 70X70 RET CINZA URBANO SAFE STEP</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('PISO 70X70 RET CINZA URBANO SAFE STEP')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="HD GRAFITTE RET 82X82 POL" class="product-image" src="HD-GRAFITTE-RET-82X82-POL.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">HD GRAFITTE RET 82X82 POL</div>
+<div class="product-description">HD GRAFITTE RET 82X82 POL
+
+RT 812399 ROCHAMAX
+
+(2.70M²)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('HD GRAFITTE RET 82X82 POL')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="Descrição:" class="product-image" src="DESCRICAO.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">Descrição:</div>
+<div class="product-description">Descrição:
+
+HD CREMA 82X82 POL RT
+
+(2.70M²) ROCHAMAXX</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('Descrição:')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="MARMO NERO 82x82 POL RT (2.70M²) 813452 ROCHAMAXX" class="product-image" src="813452.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">MARMO NERO 82x82 POL RT (2.70M²) 813452 ROCHAMAXX</div>
+<div class="product-description">MARMO NERO 82x82 POL RT (2.70M²) 813452 ROCHAMAXX</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('MARMO NERO 82x82 POL RT (2.70M²) 813452 ROCHAMAXX')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="BIANCO SUPREME 82x82 POL" class="product-image" src="BIANCO-SUPREME-82X82-POL.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">BIANCO SUPREME 82x82 POL</div>
+<div class="product-description">BIANCO SUPREME 82x82 POL
+
+RT (2.70M²) ROCHAMAXX</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('BIANCO SUPREME 82x82 POL')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Azul" onclick="openModal(this)">
+<img alt="CALACATA BLUE 82x82 POL RT  (2.70M²)  ROCHAMAXX" class="product-image" src="CALACATA-BLUE-82X82-POL-RT-2-7.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Azul</div>
+<div class="product-name">CALACATA BLUE 82x82 POL RT  (2.70M²)  ROCHAMAXX</div>
+<div class="product-description">CALACATA BLUE 82x82 POL RT  (2.70M²)  ROCHAMAXX</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('CALACATA BLUE 82x82 POL RT  (2.70M²)  ROCHAMAXX')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="67015- Crema Marfil (60x60)" class="product-image" src="67015.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">67015- Crema Marfil (60x60)</div>
+<div class="product-description">67015- Crema Marfil (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67015- Crema Marfil (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="67012- Bramante (60x60)" class="product-image" src="67012.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">67012- Bramante (60x60)</div>
+<div class="product-description">67012- Bramante (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67012- Bramante (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Cinza" onclick="openModal(this)">
+<img alt="67004- Altíssimo Cinza (60x60)" class="product-image" src="67004.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Cinza</div>
+<div class="product-name">67004- Altíssimo Cinza (60x60)</div>
+<div class="product-description">67004- Altíssimo Cinza (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67004- Altíssimo Cinza (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="67002- Avorio (60x60)" class="product-image" src="67002.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">67002- Avorio (60x60)</div>
+<div class="product-description">67002- Avorio (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67002- Avorio (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="67003- Bianco Oro (60x60)" class="product-image" src="67003.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">67003- Bianco Oro (60x60)</div>
+<div class="product-description">67003- Bianco Oro (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67003- Bianco Oro (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60321- Pedra Goiás (60x60)" class="product-image" src="60321.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60321- Pedra Goiás (60x60)</div>
+<div class="product-description">60321- Pedra Goiás (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60321- Pedra Goiás (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60332- Pietra Santa (60x60)" class="product-image" src="60332.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60332- Pietra Santa (60x60)</div>
+<div class="product-description">60332- Pietra Santa (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60332- Pietra Santa (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60319- Duran Grafite (60x60)" class="product-image" src="60319.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60319- Duran Grafite (60x60)</div>
+<div class="product-description">60319- Duran Grafite (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60319- Duran Grafite (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60317- Zermatt (60x60)" class="product-image" src="60317.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60317- Zermatt (60x60)</div>
+<div class="product-description">60317- Zermatt (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60317- Zermatt (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60329- Soneto (60x60)" class="product-image" src="60329.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60329- Soneto (60x60)</div>
+<div class="product-description">60329- Soneto (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60329- Soneto (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60316- Splendor (60x60)" class="product-image" src="60316.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60316- Splendor (60x60)</div>
+<div class="product-description">60316- Splendor (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60316- Splendor (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60305- Artisan (60x60)" class="product-image" src="60305.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60305- Artisan (60x60)</div>
+<div class="product-description">60305- Artisan (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60305- Artisan (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60327- Algarve (60x60)" class="product-image" src="60327.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60327- Algarve (60x60)</div>
+<div class="product-description">60327- Algarve (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60327- Algarve (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60304- London (60x60)" class="product-image" src="60304.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60304- London (60x60)</div>
+<div class="product-description">60304- London (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60304- London (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60306- Arbor (60x60)" class="product-image" src="60306.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60306- Arbor (60x60)</div>
+<div class="product-description">60306- Arbor (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60306- Arbor (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60328- Spazio (60x60)" class="product-image" src="60328.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60328- Spazio (60x60)</div>
+<div class="product-description">60328- Spazio (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60328- Spazio (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60116- Supreme (60x60)" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776685572000-vs5ns8csjp.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60116- Supreme (60x60)</div>
+<div class="product-description">60116- Supreme (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60116- Supreme (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60330- Elegance (60x60)" class="product-image" src="60330.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60330- Elegance (60x60)</div>
+<div class="product-description">60330- Elegance (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60330- Elegance (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60098- Himalaia (60x60)" class="product-image" src="60098.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60098- Himalaia (60x60)</div>
+<div class="product-description">60098- Himalaia (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60098- Himalaia (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="67001- Himalaia (60x60)" class="product-image" src="67001.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">67001- Himalaia (60x60)</div>
+<div class="product-description">67001- Himalaia (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67001- Himalaia (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60315- Egeo (60x60)" class="product-image" src="60315.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60315- Egeo (60x60)</div>
+<div class="product-description">60315- Egeo (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60315- Egeo (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60117- London (60x60)" class="product-image" src="60117.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60117- London (60x60)</div>
+<div class="product-description">60117- London (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60117- London (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60111- Vogue (60x60)" class="product-image" src="60111.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60111- Vogue (60x60)</div>
+<div class="product-description">60111- Vogue (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60111- Vogue (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60313- Bernini (60x60)" class="product-image" src="60313.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60313- Bernini (60x60)</div>
+<div class="product-description">60313- Bernini (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60313- Bernini (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60314- Boreal (60x60)" class="product-image" src="60314.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60314- Boreal (60x60)</div>
+<div class="product-description">60314- Boreal (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60314- Boreal (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60031- Michelangelo (60x60)" class="product-image" src="60031.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60031- Michelangelo (60x60)</div>
+<div class="product-description">60031- Michelangelo (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60031- Michelangelo (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75040- Lumina Beige (75x75)" class="product-image" src="75040.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75040- Lumina Beige (75x75)</div>
+<div class="product-description">75040- Lumina Beige (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75040- Lumina Beige (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75041- Solare Lux (75x75)" class="product-image" src="75041.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75041- Solare Lux (75x75)</div>
+<div class="product-description">75041- Solare Lux (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75041- Solare Lux (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75034- Apuano (75x75)" class="product-image" src="75034.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75034- Apuano (75x75)</div>
+<div class="product-description">75034- Apuano (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75034- Apuano (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75005- Cosmuz (75x75)" class="product-image" src="75005.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75005- Cosmuz (75x75)</div>
+<div class="product-description">75005- Cosmuz (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75005- Cosmuz (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75035- Athea (75x75)" class="product-image" src="75035.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75035- Athea (75x75)</div>
+<div class="product-description">75035- Athea (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75035- Athea (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75013- Ônix Silver (75x75)" class="product-image" src="75013.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75013- Ônix Silver (75x75)</div>
+<div class="product-description">75013- Ônix Silver (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75013- Ônix Silver (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Preto" onclick="openModal(this)">
+<img alt="75027- Ônix Black (75x75)" class="product-image" src="75027.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Preto</div>
+<div class="product-name">75027- Ônix Black (75x75)</div>
+<div class="product-description">75027- Ônix Black (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75027- Ônix Black (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Preto" onclick="openModal(this)">
+<img alt="75032- Black Gold (75x75)" class="product-image" src="75032.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Preto</div>
+<div class="product-name">75032- Black Gold (75x75)</div>
+<div class="product-description">75032- Black Gold (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75032- Black Gold (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75014- Ônix Pink (75x75)" class="product-image" src="75014.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75014- Ônix Pink (75x75)</div>
+<div class="product-description">75014- Ônix Pink (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75014- Ônix Pink (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75031- Alaska (75x75)" class="product-image" src="75031.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75031- Alaska (75x75)</div>
+<div class="product-description">75031- Alaska (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75031- Alaska (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Azul" onclick="openModal(this)">
+<img alt="75007- Ônix Blue (75x75)" class="product-image" src="75007.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Azul</div>
+<div class="product-name">75007- Ônix Blue (75x75)</div>
+<div class="product-description">75007- Ônix Blue (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75007- Ônix Blue (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75009- Patagônia (75x75)" class="product-image" src="75009.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75009- Patagônia (75x75)</div>
+<div class="product-description">75009- Patagônia (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75009- Patagônia (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75030- Magestic (75x75)" class="product-image" src="75030.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75030- Magestic (75x75)</div>
+<div class="product-description">75030- Magestic (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75030- Magestic (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Dourado" onclick="openModal(this)">
+<img alt="67019- Lumine Gold (60x60)" class="product-image" src="67019.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Dourado</div>
+<div class="product-name">67019- Lumine Gold (60x60)</div>
+<div class="product-description">67019- Lumine Gold (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67019- Lumine Gold (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="67013- Mirage (60x60)" class="product-image" src="67013.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">67013- Mirage (60x60)</div>
+<div class="product-description">67013- Mirage (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67013- Mirage (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="PR7081- Pol (70x70)" class="product-image" src="PR7081.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">PR7081- Pol (70x70)</div>
+<div class="product-description">PR7081- Pol (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('PR7081- Pol (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7044- Brilhante (70x70)" class="product-image" src="R7044.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7044- Brilhante (70x70)</div>
+<div class="product-description">R7044- Brilhante (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7044- Brilhante (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7004- Acetinado (70x70)" class="product-image" src="R7004.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7004- Acetinado (70x70)</div>
+<div class="product-description">R7004- Acetinado (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7004- Acetinado (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7040- Acetinado (70x70)" class="product-image" src="R7040.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7040- Acetinado (70x70)</div>
+<div class="product-description">R7040- Acetinado (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7040- Acetinado (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7007- Graninha (70x70)" class="product-image" src="R7007.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7007- Graninha (70x70)</div>
+<div class="product-description">R7007- Graninha (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7007- Graninha (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7038- Safe Step (70x70)" class="product-image" src="R7038.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7038- Safe Step (70x70)</div>
+<div class="product-description">R7038- Safe Step (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7038- Safe Step (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7018- Safe Step (70x70)" class="product-image" src="R7018.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7018- Safe Step (70x70)</div>
+<div class="product-description">R7018- Safe Step (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7018- Safe Step (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7014- Brilhante (70x70)" class="product-image" src="R7014.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7014- Brilhante (70x70)</div>
+<div class="product-description">R7014- Brilhante (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7014- Brilhante (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7037- Brilhante (70x70)" class="product-image" src="R7037.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7037- Brilhante (70x70)</div>
+<div class="product-description">R7037- Brilhante (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7037- Brilhante (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="PR7096- Pol (70X70)" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776634924358-1mtst9x1p7g.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">PR7096- Pol (70X70)</div>
+<div class="product-description">PR7096- Pol (70X70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('PR7096- Pol (70X70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="R7013- Granilha (70x70)" class="product-image" src="R7013.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">R7013- Granilha (70x70)</div>
+<div class="product-description">R7013- Granilha (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('R7013- Granilha (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75002- Estremoz (75x75)" class="product-image" src="75002.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75002- Estremoz (75x75)</div>
+<div class="product-description">75002- Estremoz (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75002- Estremoz (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="76008- Portland (76x76)" class="product-image" src="76008.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">76008- Portland (76x76)</div>
+<div class="product-description">76008- Portland (76x76)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('76008- Portland (76x76)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="76031- Alameda (76x76)" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776634245092-gluj9tp8mqf.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">76031- Alameda (76x76)</div>
+<div class="product-description">76031- Alameda (76x76)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('76031- Alameda (76x76)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="76040- Solare (76x76)" class="product-image" src="76040.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">76040- Solare (76x76)</div>
+<div class="product-description">76040- Solare (76x76)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('76040- Solare (76x76)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="76042- Ceppo (76x76)" class="product-image" src="76042.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">76042- Ceppo (76x76)</div>
+<div class="product-description">76042- Ceppo (76x76)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('76042- Ceppo (76x76)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Claros" onclick="openModal(this)">
+<img alt="76041- Studio Off (76x76)" class="product-image" src="76041.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Claros</div>
+<div class="product-name">76041- Studio Off (76x76)</div>
+<div class="product-description">76041- Studio Off (76x76)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('76041- Studio Off (76x76)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="76039- Pietra Toscana (76x76)" class="product-image" src="76039.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">76039- Pietra Toscana (76x76)</div>
+<div class="product-description">76039- Pietra Toscana (76x76)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('76039- Pietra Toscana (76x76)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="76034- Alaska (76x76)" class="product-image" src="76034.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">76034- Alaska (76x76)</div>
+<div class="product-description">76034- Alaska (76x76)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('76034- Alaska (76x76)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="76035- Sampa Natural (76x76)" class="product-image" src="76035.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">76035- Sampa Natural (76x76)</div>
+<div class="product-description">76035- Sampa Natural (76x76)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('76035- Sampa Natural (76x76)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75011- Aspen (75x75)" class="product-image" src="75011.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75011- Aspen (75x75)</div>
+<div class="product-description">75011- Aspen (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75011- Aspen (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Dourado" onclick="openModal(this)">
+<img alt="75003- Calacata Gold (75x75)" class="product-image" src="75003.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Dourado</div>
+<div class="product-name">75003- Calacata Gold (75x75)</div>
+<div class="product-description">75003- Calacata Gold (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75003- Calacata Gold (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75036- Desert (75x75)" class="product-image" src="75036.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75036- Desert (75x75)</div>
+<div class="product-description">75036- Desert (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75036- Desert (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75033- Palissandro (75x75)" class="product-image" src="75033.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75033- Palissandro (75x75)</div>
+<div class="product-description">75033- Palissandro (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75033- Palissandro (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75042- Biancatto (75x75)" class="product-image" src="75042.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75042- Biancatto (75x75)</div>
+<div class="product-description">75042- Biancatto (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75042- Biancatto (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75040- Lumina Beige (75x75)" class="product-image" src="75040.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75040- Lumina Beige (75x75)</div>
+<div class="product-description">75040- Lumina Beige (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75040- Lumina Beige (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75041- Solare Lux (75x75)" class="product-image" src="75041.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75041- Solare Lux (75x75)</div>
+<div class="product-description">75041- Solare Lux (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75041- Solare Lux (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75034- Apuano (75x75)" class="product-image" src="75034.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75034- Apuano (75x75)</div>
+<div class="product-description">75034- Apuano (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75034- Apuano (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75005- Cosmuz (75x75)" class="product-image" src="75005.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75005- Cosmuz (75x75)</div>
+<div class="product-description">75005- Cosmuz (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75005- Cosmuz (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75035- Athea (75x75)" class="product-image" src="75035.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75035- Athea (75x75)</div>
+<div class="product-description">75035- Athea (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75035- Athea (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75013- Ônix Silver (75x75)" class="product-image" src="75013.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75013- Ônix Silver (75x75)</div>
+<div class="product-description">75013- Ônix Silver (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75013- Ônix Silver (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Preto" onclick="openModal(this)">
+<img alt="75027- Ônix Black (75x75)" class="product-image" src="75027.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Preto</div>
+<div class="product-name">75027- Ônix Black (75x75)</div>
+<div class="product-description">75027- Ônix Black (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75027- Ônix Black (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Preto" onclick="openModal(this)">
+<img alt="75032- Black Gold (75x75)" class="product-image" src="75032.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Preto</div>
+<div class="product-name">75032- Black Gold (75x75)</div>
+<div class="product-description">75032- Black Gold (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75032- Black Gold (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75014- Ônix Pink (75x75)" class="product-image" src="75014.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75014- Ônix Pink (75x75)</div>
+<div class="product-description">75014- Ônix Pink (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75014- Ônix Pink (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Azul" onclick="openModal(this)">
+<img alt="75007- Ônix Blue (75x75)" class="product-image" src="75007.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Azul</div>
+<div class="product-name">75007- Ônix Blue (75x75)</div>
+<div class="product-description">75007- Ônix Blue (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75007- Ônix Blue (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75031- Alaska (75x75)" class="product-image" src="75031.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75031- Alaska (75x75)</div>
+<div class="product-description">75031- Alaska (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75031- Alaska (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75009- Patagônia (75x75)" class="product-image" src="75009.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75009- Patagônia (75x75)</div>
+<div class="product-description">75009- Patagônia (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75009- Patagônia (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="75030- Magestic (75x75)" class="product-image" src="75030.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">75030- Magestic (75x75)</div>
+<div class="product-description">75030- Magestic (75x75)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('75030- Magestic (75x75)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Dourado" onclick="openModal(this)">
+<img alt="67019- Lumine Gold (60x60)" class="product-image" src="67019.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Dourado</div>
+<div class="product-name">67019- Lumine Gold (60x60)</div>
+<div class="product-description">67019- Lumine Gold (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67019- Lumine Gold (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="67001- Himalaia (60x60)" class="product-image" src="67001.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">67001- Himalaia (60x60)</div>
+<div class="product-description">67001- Himalaia (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67001- Himalaia (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="67013- Mirage (60x60)" class="product-image" src="67013.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">67013- Mirage (60x60)</div>
+<div class="product-description">67013- Mirage (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('67013- Mirage (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="69021- Macchia Oro (60x120)" class="product-image" src="69021.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">69021- Macchia Oro (60x120)</div>
+<div class="product-description">69021- Macchia Oro (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('69021- Macchia Oro (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="69502- Ducale Mocha (60x120)" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776631978048-4c2tmrdvfl3.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">69502- Ducale Mocha (60x120)</div>
+<div class="product-description">69502- Ducale Mocha (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('69502- Ducale Mocha (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="69500- Decormix (60x120)" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776631885372-3a30thwhoet.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">69500- Decormix (60x120)</div>
+<div class="product-description">69500- Decormix (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('69500- Decormix (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Cinza" onclick="openModal(this)">
+<img alt="68030- Grey Essence (60x120)" class="product-image" src="68030.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Cinza</div>
+<div class="product-name">68030- Grey Essence (60x120)</div>
+<div class="product-description">68030- Grey Essence (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68030- Grey Essence (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68027- Eclipse Oro (60x120)" class="product-image" src="68027.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68027- Eclipse Oro (60x120)</div>
+<div class="product-description">68027- Eclipse Oro (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68027- Eclipse Oro (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68028- Millenium Nero (60x120)" class="product-image" src="68028.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68028- Millenium Nero (60x120)</div>
+<div class="product-description">68028- Millenium Nero (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68028- Millenium Nero (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Dourado" onclick="openModal(this)">
+<img alt="68011- Golden Carbon (60x120)" class="product-image" src="68011.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Dourado</div>
+<div class="product-name">68011- Golden Carbon (60x120)</div>
+<div class="product-description">68011- Golden Carbon (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68011- Golden Carbon (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68020- Onice Luna (60x120)" class="product-image" src="68020.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68020- Onice Luna (60x120)</div>
+<div class="product-description">68020- Onice Luna (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68020- Onice Luna (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68001- Statuario (60x120)" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776631763161-00zro2zln3uv.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68001- Statuario (60x120)</div>
+<div class="product-description">68001- Statuario (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68001- Statuario (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68025- Taj Mahal (60x120)" class="product-image" src="68025.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68025- Taj Mahal (60x120)</div>
+<div class="product-description">68025- Taj Mahal (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68025- Taj Mahal (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68024- Max Silver (60x120)" class="product-image" src="68024.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68024- Max Silver (60x120)</div>
+<div class="product-description">68024- Max Silver (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68024- Max Silver (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68026- Storm (60x120)" class="product-image" src="68026.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68026- Storm (60x120)</div>
+<div class="product-description">68026- Storm (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68026- Storm (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Dourado" onclick="openModal(this)">
+<img alt="68016- Gold River (60x120)" class="product-image" src="68016.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Dourado</div>
+<div class="product-name">68016- Gold River (60x120)</div>
+<div class="product-description">68016- Gold River (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68016- Gold River (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68005- Aspen (60x120)" class="product-image" src="68005.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68005- Aspen (60x120)</div>
+<div class="product-description">68005- Aspen (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68005- Aspen (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68006- Ombra Di Caravaggio (60x120)" class="product-image" src="68006.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68006- Ombra Di Caravaggio (60x120)</div>
+<div class="product-description">68006- Ombra Di Caravaggio (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68006- Ombra Di Caravaggio (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68004- Marmo Grafite (60x120)" class="product-image" src="68004.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68004- Marmo Grafite (60x120)</div>
+<div class="product-description">68004- Marmo Grafite (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68004- Marmo Grafite (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Preto" onclick="openModal(this)">
+<img alt="68020- Black Gold (60x120)" class="product-image" src="68020.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Preto</div>
+<div class="product-name">68020- Black Gold (60x120)</div>
+<div class="product-description">68020- Black Gold (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68020- Black Gold (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68017- Machia Oro (60x120)" class="product-image" src="69021.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68017- Machia Oro (60x120)</div>
+<div class="product-description">68017- Machia Oro (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68017- Machia Oro (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68022- Perlato (60x120)" class="product-image" src="68022.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68022- Perlato (60x120)</div>
+<div class="product-description">68022- Perlato (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68022- Perlato (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="37114- Origame Mix (32x57)" class="product-image" src="37114.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">37114- Origame Mix (32x57)</div>
+<div class="product-description">37114- Origame Mix (32x57)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('37114- Origame Mix (32x57)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="37023- Matine Couto (31x56)" class="product-image" src="37023.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">37023- Matine Couto (31x56)</div>
+<div class="product-description">37023- Matine Couto (31x56)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('37023- Matine Couto (31x56)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="68017- Machia Oro (60x120)" class="product-image" src="69021.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">68017- Machia Oro (60x120)</div>
+<div class="product-description">68017- Machia Oro (60x120)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('68017- Machia Oro (60x120)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="29103- Progetto Bege (29x54)" class="product-image" src="29103.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">29103- Progetto Bege (29x54)</div>
+<div class="product-description">29103- Progetto Bege (29x54)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('29103- Progetto Bege (29x54)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="31098- Himalaia (31x56)" class="product-image" src="31098.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">31098- Himalaia (31x56)</div>
+<div class="product-description">31098- Himalaia (31x56)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('31098- Himalaia (31x56)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="37109- Origame HD (32x57)" class="product-image" src="37109.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">37109- Origame HD (32x57)</div>
+<div class="product-description">37109- Origame HD (32x57)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('37109- Origame HD (32x57)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Cinza" onclick="openModal(this)">
+<img alt="31004 Atelier Cinza (31x56)" class="product-image" src="31004.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Cinza</div>
+<div class="product-name">31004 Atelier Cinza (31x56)</div>
+<div class="product-description">31004 Atelier Cinza (31x56)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('31004 Atelier Cinza (31x56)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="31005- Atelier Blush (31x56)" class="product-image" src="31005.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">31005- Atelier Blush (31x56)</div>
+<div class="product-description">31005- Atelier Blush (31x56)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('31005- Atelier Blush (31x56)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Claros" onclick="openModal(this)">
+<img alt="31002- Atelier Branco (31x56)" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776629449709-kkuply1wy7l.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Claros</div>
+<div class="product-name">31002- Atelier Branco (31x56)</div>
+<div class="product-description">31002- Atelier Branco (31x56)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('31002- Atelier Branco (31x56)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Claros" onclick="openModal(this)">
+<img alt="37025- Prisma Branco (32x57)" class="product-image" src="37025.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Claros</div>
+<div class="product-name">37025- Prisma Branco (32x57)</div>
+<div class="product-description">37025- Prisma Branco (32x57)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('37025- Prisma Branco (32x57)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="37206- Âmbar (32x57)" class="product-image" src="37206.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">37206- Âmbar (32x57)</div>
+<div class="product-description">37206- Âmbar (32x57)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('37206- Âmbar (32x57)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="Pedra Nobre Safe Step (70x70)" class="product-image" src="PEDRA-NOBRE-SAFE-STEP-70X70.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">Pedra Nobre Safe Step (70x70)</div>
+<div class="product-description">Pedra Nobre Safe Step (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('Pedra Nobre Safe Step (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="HD Marmo Gris Pol (82x82)" class="product-image" src="HD-MARMO-GRIS-POL-82X82.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">HD Marmo Gris Pol (82x82)</div>
+<div class="product-description">HD Marmo Gris Pol (82x82)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('HD Marmo Gris Pol (82x82)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="HD Gran Calacata Pol (82x82)" class="product-image" src="HD-GRAN-CALACATA-POL-82X82.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">HD Gran Calacata Pol (82x82)</div>
+<div class="product-description">HD Gran Calacata Pol (82x82)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('HD Gran Calacata Pol (82x82)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="PR7081 Pol (70x70)" class="product-image" src="PR7081.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">PR7081 Pol (70x70)</div>
+<div class="product-description">PR7081 Pol (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('PR7081 Pol (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Cinza" onclick="openModal(this)">
+<img alt="Cinza Urbano Safe Step (70x70)" class="product-image" src="PISO-70X70-RET-CINZA-URBANO-SA.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Cinza</div>
+<div class="product-name">Cinza Urbano Safe Step (70x70)</div>
+<div class="product-description">Cinza Urbano Safe Step (70x70)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('Cinza Urbano Safe Step (70x70)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="HD Grafite Pol (82x82)" class="product-image" src="HD-GRAFITTE-RET-82X82-POL.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">HD Grafite Pol (82x82)</div>
+<div class="product-description">HD Grafite Pol (82x82)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('HD Grafite Pol (82x82)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="HD Crema Pol (82x82)" class="product-image" src="DESCRICAO.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">HD Crema Pol (82x82)</div>
+<div class="product-description">HD Crema Pol (82x82)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('HD Crema Pol (82x82)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Pisos Azul" onclick="openModal(this)">
+<img alt="Calacata Blue Pol (82x82)" class="product-image" src="CALACATA-BLUE-82X82-POL-RT-2-7.jpg"/>
+<div class="product-info">
+<div class="product-category">Pisos Azul</div>
+<div class="product-name">Calacata Blue Pol (82x82)</div>
+<div class="product-description">Calacata Blue Pol (82x82)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('Calacata Blue Pol (82x82)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="HD Bianco Supreme Pol (82x82)" class="product-image" src="BIANCO-SUPREME-82X82-POL.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">HD Bianco Supreme Pol (82x82)</div>
+<div class="product-description">HD Bianco Supreme Pol (82x82)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('HD Bianco Supreme Pol (82x82)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="HD Dommus Pol (82x82)" class="product-image" src="HD-DOMMUS-POL-82X82.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">HD Dommus Pol (82x82)</div>
+<div class="product-description">HD Dommus Pol (82x82)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('HD Dommus Pol (82x82)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="HD Marmo Nero Pol (82x82)" class="product-image" src="813452.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">HD Marmo Nero Pol (82x82)</div>
+<div class="product-description">HD Marmo Nero Pol (82x82)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('HD Marmo Nero Pol (82x82)')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="45750 CALCIATTA RIO 45X45" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22250%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EImagem não disponível%3C/text%3E%3C/svg%3E'" src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028832433/Fh8jgszhTZrjzVJyBs3mdr/catalog-photos/1776204117759-9lx2cqkbigi.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">45750 CALCIATTA RIO 45X45</div>
+<div class="product-description">45750 CALCIATTA RIO 45X45
+
+NARDINE (2.57M²)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('45750 CALCIATTA RIO 45X45')">Solicitar Orçamento</button>
+</div>
+</div>
+<div class="product-card" data-category="Outros" onclick="openModal(this)">
+<img alt="60001 Avorio (60x60)" class="product-image" src="67002.jpg"/>
+<div class="product-info">
+<div class="product-category">Outros</div>
+<div class="product-name">60001 Avorio (60x60)</div>
+<div class="product-description">60001 Avorio (60x60)</div>
+<button class="product-button" onclick="event.stopPropagation(); contactWhatsApp('60001 Avorio (60x60)')">Solicitar Orçamento</button>
+</div>
+</div>
+</div>
+</div>
+<div class="modal" id="imageModal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">×</span>
+<img alt="" class="modal-image" id="modalImage" src=""/>
+<div id="modalProductInfo"></div>
+<button class="modal-button" id="modalButton" onclick="contactWhatsAppFromModal()">Solicitar Orçamento via WhatsApp</button>
+</div>
+</div>
+<footer>
+<div class="footer-content">
+<div class="footer-section">
+<h3>Stop Pisos</h3>
+<p>Sua loja de pisos de confiança com a melhor qualidade e variedade do mercado.</p>
+</div>
+<div class="footer-section">
+<h3>Contato</h3>
+<p><strong>WhatsApp:</strong> <a href="https://wa.me/559881236521">9881236521</a></p>
+<p><strong>Horário:</strong> Segunda a Sexta, 8h às 18h</p>
+</div>
+<div class="footer-section">
+<h3>Categorias</h3>
+<p><a href="#" onclick="filterProducts('Pisos Claros')">Pisos Claros</a></p>
+<p><a href="#" onclick="filterProducts('Pisos Cinza')">Pisos Cinza</a></p>
+<p><a href="#" onclick="filterProducts('Pisos Madeira')">Pisos Madeira</a></p>
+</div>
+</div>
+</footer>
+<a class="whatsapp-float" href="https://wa.me/559881236521?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20os%20pisos%20da%20Stop%20Pisos.">💬</a>
+<script>
+        let currentFilter = 'Todos';
+        let currentProductName = '';
+
+        function filterProducts(category) {
+            currentFilter = category;
+            const cards = document.querySelectorAll('.product-card');
+            let count = 0;
+
+            cards.forEach(card => {
+                if (category === 'Todos' || card.dataset.category === category) {
+                    card.style.display = '';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            const grid = document.getElementById('productsGrid');
+            if (count === 0) {
+                grid.innerHTML = '<div class="no-products">Nenhum produto encontrado nesta categoria.</div>';
+            }
+        }
+
+        function searchProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.product-card');
+            let count = 0;
+
+            cards.forEach(card => {
+                const name = card.querySelector('.product-name').textContent.toLowerCase();
+                const description = card.querySelector('.product-description').textContent.toLowerCase();
+                const category = card.dataset.category;
+
+                if ((name.includes(searchTerm) || description.includes(searchTerm)) && 
+                    (currentFilter === 'Todos' || category === currentFilter)) {
+                    card.style.display = '';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const grid = document.getElementById('productsGrid');
+            if (count === 0 && searchTerm) {
+                grid.innerHTML = '<div class="no-products">Nenhum produto encontrado.</div>';
+            }
+        }
+
+        function openModal(element) {
+            const image = element.querySelector('.product-image').src;
+            const name = element.querySelector('.product-name').textContent;
+            const description = element.querySelector('.product-description').textContent;
+            const category = element.dataset.category;
+
+            currentProductName = name;
+
+            document.getElementById('modalImage').src = image;
+            document.getElementById('modalProductInfo').innerHTML = `
+                <div class="product-category">${category}</div>
+                <div class="product-name">${name}</div>
+                <div class="product-description">${description}</div>
+            `;
+
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        function contactWhatsApp(productName) {
+            const message = `Olá! Tenho interesse no produto: ${productName}. Gostaria de mais informações.`;
+            window.open(`https://wa.me/559881236521?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function contactWhatsAppFromModal() {
+            const message = `Olá! Tenho interesse no produto: ${currentProductName}. Gostaria de mais informações.`;
+            window.open(`https://wa.me/559881236521?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        document.getElementById('searchInput').addEventListener('keyup', searchProducts);
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
